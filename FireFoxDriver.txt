@@ -1,0 +1,32 @@
+
+
+===============================New Note For FireFox============================================================
+
+
+On FireFox Browser write-->about:config --->Hit Enter Key---> I accept the risk
+
+Now search for 'notification' and hit enter
+
+copy-->dom.webnotifications.enabled;true
+
+Here--> key=dom.webnotifications.enabled and value = true
+
+-----------------------------Below the final code for blocking the notification------------------------------
+
+                                FirefoxOptions opt = new FirefoxOptions();
+				opt.addPreference("dom.webnotifications.enabled", false);
+	                        driver = new FirefoxDriver(opt);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
