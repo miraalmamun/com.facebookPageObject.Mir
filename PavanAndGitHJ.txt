@@ -1,0 +1,520 @@
+https://www.youtube.com/watch?v=F8Nfjwneeb4
+https://pavanonlinetrainings.com/selenium.html
+
+Execution
+1.Run test cases with Maven pom.xml
+2.Run test cases through Maven CLI(Command Line Interface)
+3.Run test cases using run.bat
+4.Run test cases using Jenkins(using bat file)
+
+Maintenance
+. Creating repository in GITHUB
+. Commit the project code in local repository
+. Push the project code to GITHUB remote repository from local GIT repository
+------------------------------------------------------------------------------
+. What does DevOps mean?
+DevOps (development and operations) is an enterprise software development phrase
+used to mean a type of agile relationship between development and IT operations. 
+The goal of DevOps is to change and improve the relationship by advocating better 
+communication and collaboration between these two business units.
+--------------------------------------------------------------------------------
+DevOps is a set of practices that automates the processes between software 
+development and IT teams, in order that they can build, test, and release 
+software faster and more reliably. The concept of DevOps is founded on 
+building a culture of collaboration between teams that historically 
+functioned in relative siloes. The promised benefits include increased 
+trust, faster software releases, ability to solve critical issues quickly,
+and better manage unplanned work
+--------------------------------------------------------------------------------
+1. Run test cases with Maven pom.xml(Once this one succeed then we can go second
+approached:2.Run test cases through Maven CLI(Command Line Interface))
+Lets follow first approached-->1. Run test cases with Maven pom.xml
+
+Very Important Note: testng.xml,we can execute only within Eclipse. So with out 
+Eclipse we cannot execute testng.xml file. There is other way we can execute our 
+testcases through pom.xml, to execute pom.xml file, it is not mandatory to use Eclipse
+with out Eclipse we can execute our testcases through pom.xml file.
+-->So far we used pom.xml file only for dependecy. pom.xml file downloan all jars
+and attached to our project.
+-->So we are going to see how to use pom.xml file to execute testcases. Internally
+pom.xml file execute testng.xml file.
+
+--> So question here since we have testng.xml file why we need pom.xml file for
+execution? Answer --> Without Eclipse we cannot execute testng.xml file. If we closed
+Eclipse, we cannot execute testcases through testng.xml file. Thats why we need use pom.xml
+for execution.To use pom.xml we donot need required Eclipse. Without Eclipse we can run our
+automation testcases. This is the another benefite to use pom.xml file.
+
+--> Here is very important note to remember, First execute testcases through pom.xml
+by using Eclipse, then it will be running without any issue. It is validation.
+So first run Maven pom.xml file within your Eclipse. Then it will be good to use 
+other places.
+
+In order to Run test cases using pom.xml within Eclipse, we have to follow bellow steps
+ 
+ plugins--> used to run your Maven project
+   
+   maven-compiler-plugin
+   maven-surefire-plugin
+      This two  worked like dependency
+
+Open you Eclipse--> Below properties,before dependencies add the following
+      
+
+
+
+             <build>
+                <plugins>
+                   
+                   <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                         <artifactId>maven-compiler-plugin</artifactId>
+                         <configuration>
+                            <source>1.8</source>
+                            <target>1.8</target>
+                         </configuration>
+                     </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                         <artifactId>maven-surefire-plugin</artifactId>
+                         <version>2.18.1</version>
+                         <configuration>
+                            <suiteXmlFiles>
+                              <suiteXmlFile>testng.xml</suiteXmlFile>
+                            </suiteXmlFiles>
+                         </configuration>
+                     </plugin>
+               </plugins>
+            </build>
+
+
+
+
+Note: 'maven-compiler-plugin'--> responsibles for compile the codes
+      'maven-surefire-plugin'--> respensibles for executing 'testng.xml' file
+
+
+As soon as you add this two plugins, Right click on project-->Select Maven-->
+Update project
+
+RUN TEST CASES USING MAVEN pom.xml
+#You need to add 2 plug-ins to pom.xml File
+ . maven-compiler-plugin
+ . maven-surefire-plugin
+
+.Right click on pom.xml->Run as Maven test
+Issue:
+. Error:[Error] No compiler is providing in this environment. Perhaps you are
+running on a JRE rather than a JDK?
+. Solution: Eclipse Window->Preferences->Java->Installed JRE's->and check your installed JREs
+. You should have an entry with a JDK there
+. Select the Execution Environment as "C:\Program Files\Java\jdk1.8.0_211"-->Click OK
+
+--------------After success above approach then go next approach----------
+2) Run test cases using Command prompt(Without using Eclipse)------------
+
+We have to install complete Maven software. Normally Maven is available in two flavour
+ 1.As Eclipse plugin(We are able to run test cases within Eclipse only/create Maven project/Updated xml file)
+If you want run test cases through command prompt, we need to install Maven on our
+Operating System. Maven is availabe as a installer on specific OS.
+ 2.Installed Maven on OS(Operating System-->Windows,Linux,Mac,Unix)
+----------------------------------------------------------------------------------
+       Download and Cofiguratin 
+---------------------------------------------------------------------------------
+https://maven.apache.org/download.cgi
+Maven download Link:
+https://www-eu.apache.org/dist/maven/maven-3/3.6.1/binaries/apache-maven-3.6.1-bin.zip
+
+For Windows OS always Zip File(Binary zip archive)
+
+Extract the Zip File(Zip file is in Downloads directory)
+then copy and past the Folder on C: drive(Best way to handle, You can keep it any place you want)
+In my computer I kept
+C:\Users\Mir\apache-maven-3.5.4
+
+We donot need any kind of installation here. But we need to configure the path(very important)
+-->Go to Advanced system setting-->Environment Variables-->System variables-->Click on Path
+Edit-->Add 3 items in Path
+     1. C:\Users\Mir\apache-maven-3.5.4\bin\
+     2. %M2_HOME%\bin
+     3. %MAVEN_HOME%
+
+For the Jenkins we need to create addition two more variables
+in System Variables
+     1.M2_HOME-->Value:C:\Users\Mir\apache-maven-3.5.4\
+     2.MAVEN_HOME-->Value:C:\Users\Mir\apache-maven-3.5.4\
+
+Now open Command Prompt and Check the Maven is properly install or not
+-->mvn -version
+
+
+C:\Users\Mir>mvn -version
+Apache Maven 3.5.4 (1edded0938998edf8bf061f1ceb3cfdeccf443fe; 2018-06-17T14:33:14-04:00)
+Maven home: C:\Users\Mir\apache-maven-3.5.4\bin\..
+Java version: 1.8.0_211, vendor: Oracle Corporation, runtime: C:\Program Files\Java\jdk1.8.0_211\jre
+Default locale: en_US, platform encoding: Cp1252
+OS name: "windows 10", version: "10.0", arch: "amd64", family: "windows"
+
+It means Maven properly install in my system.
+--------------------------------------------------------------------------
+Run test cases through Maven CLI
+  1. Install Maven on Windows OS
+      . Download Maven for Windows
+      . https://www-eu.apache.org/dist/maven/maven-3/3.6.1/binaries/apache-maven-3.6.1-bin.zip
+
+. Add Maven path on Windows Environment variable
+    . Right click on MyPC-->Advanced System setting-->Environment variables
+. Check version of Maven installed on Windows
+
+. Issue:
+. Error:[Error] No compiler is provided in this environment. Perhaps you are running on a JRE rather than a JDK
+. Solution: REFERE LINK: http://roufid.com/no-compiler-is-provided-in-this-environment/
+
+. Run Test cases through command prompt.
+  . cd C:\Users\Mir\eclipse-workspace\nopCommerce_V001(This is the path for project )
+  . mvn clean install
+
+Location of project: C:\Users\Mir\eclipse-workspace\nopCommerce_V001
+
+"mvn clear install" This command internaly execute pom.xml File(And pom.xml File internally execute testng.xml File)
+======================================================================================
+
+3) Run test cases using run.bat
+-----------------------------------
+Now I donot want to open command prompt and manually enter the project path and 'mvn clear install'
+I want make a file and if click on it, it will automatically open the command prompt and exeute my test cases
+How I can do it
+
+Lets go same project directory itself
+In 'C:\Users\Mir\eclipse-workspace\nopCommerce_V001' here(Project file directory),Here I will make
+a file with extention (.bat)--> It is called Batch File other word executable file for Windows OS
+I am going to make it as 'run.bat'
+
+Right click on run.bat->edit
+write:
+cd C:\Users\Mir\eclipse-workspace\nopCommerce_V001(navigate project file)
+mvn clear install-->Save the file and closed it
+
+Now double click on the run.bat file
+Command prompt will automatically open and execute test cases
+
+=============Final Approach through Jenkins==================
+continuous integration start---------------------------
+
+  . Continuous Integration(CI)
+    . Maven
+    . Jenkins
+    . Git
+    . GitHub
+
+https://www.tutorialspoint.com/free_online_whiteboard.htm
+
+
+In real time environment, there are three important teams will work together.
+This is actually happening in real life. Basically there are three important teams will
+work together.
+1. Developers/Development is one team(write real code/programmer)/Implement the code 
+2. QA is a another team
+3.Between these two teams there will be another team called as a DevOps(development and operations)
+These people are responsible for integration stuff, like they will assist Developers and QA
+They will perform certain tasks from the developer and they will perform certain tasks from the QA
+They will basically share the tasks between QA and Dev.
+
+Let's see each and everybody's role.
+So every teams contains certain number of people
+
+The dev responsible is,Dev is implement the code.
+They have to write all the code by using some programming
+language. And end of the day, developers, they will keep their code
+in common place. This is called a common share repository, this means a common place
+and everybody can share this file. This is called check in proccess. Once the checkin process
+nothing but whatever code is completed they will keep copy in the repository
+This is checkin proccess. Once the developer checkin their code what devops team will do is that they
+pick up that particular code, they will do the all integration part then they will create a Build.
+Because we dont get the programms directly from the developers,okey
+So DevOps team will create a build. After integrating all this programm(From repository code)
+Build is nothing but a final integrated product,Normally it will be an exe file or sometimes
+it will be MS file or some other formet it is just an installer file we can just get it and
+double click and start installation so this is just the installation file installer file we
+we dont get any code from the developers okey. So main task for devops team is to create the Build
+from the developer point of view. But actually Build should be created by the developer. But DevOps team will
+will take the code from the repository and they will create the Build.
+So once they created the Build okey. This is de
+velopers to DevOps. Now come to the QA part. So what the QA team will is resposible for and QA also there are
+multiple people who are working under multiple test cases right so as soon as the have completed their
+their test cases automation test cases I'm talking about
+so whaever the test cases they have completed and here we have a common repository.
+So everybody in the team will check in their code in the particular repository
+At the end of the day whatever we have completed the code will be part of this particular common repository
+or automation test cases will be part of this particular common repository.
+Now once the DevOps team is created the Build, On the other side DevOps team itself will take our automation
+code from our repository  and execute our automation code against the Build. So here itself the Sanity and smoke testing
+will be completed so what is sanity testing means the basic functionality testing. Whether the build is properly installed
+or not and basic functionality is working or not we can verify here itself and here this is the responsibility of the DevOps
+not for the QA team , So before QA  is getting the build itself and it will automatically verify the
+basic functionality. So what the DevOps team is doing here is they are creating the build by taking code from the developers
+and also they are executing our automation on the particular build after taking our code from the common repository so the DevOps
+is helping the QA as well as the developers. So what is the use of this one is our proccess will become very faster
+In the egile proccess especially things will go very faster so developers team parallel works and QA team also parallel works
+DeOps team will coordinate between the QA as well as dev okey. The DevOps team responsibilities is maimly integration purpose
+so they will integrate all of the code and create the build. DevOps team is resposible for build automation means they have to create
+the build based on the programs which are created by the devolopers. Now they will take our automation pool from our common repository
+and they will execute our automation code on the build and once the build is successful basic automation is passed and everybody in the team
+QA,Developers,DevOps will get automatic emailthat build is successful and then QA team will downloan this build in their environment and install
+in their environment and continue the rest of the functionality or bug fixes, build is sometimes nothing but bug fixes,sometimes you have bug fixes
+sometimes you have a new features implemented by the developers so those things will be tested in the QA environment again once they have passed
+they have immediately auto mail for all team member. So in DevOps team so here to creation of the build they will used Maven software and to run our automation
+in the build they will use Jenkins software. So here the Maven ,Jenkins will come to the picture. So actually Maven and Jenkins are DevOps tools or we can say 
+continuous integration tools. Basically Maven is purly build automation tool. But as a tester we are using just a few number of feature from Maven,Just updating
+pom.xml , running out test cases from command prompt. So this features already there in the Maven so we are just using only 5 to 10% of the features fro the Maven
+We are not using 100% features. But DevOps team will use all the featues from Maven. By using this Maven they will create the build they will integrate all the 
+programs and finally they create the build so ...Jenkins is a tool they will use to run our automation code on the build and once the build is successful and our
+automation is executed and final build will be ready in the Jenkins itself so we have to download the Jenkins build and in our QA environment. So Maven and Jenkins
+is mainly used in DevOps team. We are not using this tools 100%. We are not 100% responsible for Jenkins and Maven. We use its features from Jenkins and Maven
+but actually owning by the DevOps team. Now why we have to execute our testcases using Jenkins,the third approach because DevOps team will execute our automation
+test cases only through Jenkins but what is our role we have to keep our coding in the common repository , we have to do certain configuration of the Jenkins,we have
+to take, we need to take ownership of our configuration for Jenkins. And the onwords automatically and even DevOps team also will not run the automation the automation
+the automation run automatically happen based upon the schedule they will set certain time based upon the time Jenkins will execute our test cases automatically but 
+our QA responsible just we need to just configure --> We have to keeo uor code in the common repository then you have to configure this path everything in the Jenkins
+We have to some trial and run. Whenever you executing test cases through Jenkins we cannot see the UI(Browser) It is completely headless execution,everything will happen
+at the backend, automation cases will run you can see all the logs what is happening backend we can see, but as a user we can see any UI.
+
+In the real time environment you don't install Jenkins in your system very very important, so Jenkins will be owned by the DevOps team, they will install in their environment
+and they will just give the URL to you to access the Jenkins. This is web-based application.
+You just need to create userName and password. Sometimes they will provided username. You need to add your project and do the configuration. Jenkins automatically picked up the 
+code from common repository and execute the code and execute you test cases.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                    Install Maven Plugins in Jenkins 
+
+Because we are using Maven project in Eclipse so we going to run Maven project
+within Jenkins.
+
+Manage Jenkins-->Manage Plugins-->select all entry releted to the Jenkins
+1.Maven integration.
+2.Maven release plugin
+3.Maven invoker
+4.Maven repository
+5. Shedule cleanup
+6.Repository connector
+7. Maven info
+many more
+........................
+install without restart
+download now after restart-->click it
+
+
+RUN AUTOMATION THROUGH JENKINS
+
+
+Two different ways we can run our project within
+the Jenkins. So first approach is just go to new item
+1. Freestyle project(to run bat file)
+2. Maven project(to run pom.xml file)
+In real life we always used Maven project
+
+
+1-->projectName-->Freestyle project-->OK
+Build-->Add build step-->Execute Windows batch command
+Here you have to provide the location of your 'run.bat' file
+
+
+Run Automation using Jenkins Free Style Project
+
+Steps:
+New item-->provide name of the project-->Free style project-->ok
+Go to build section-->Execute windows batch command-->Specify path of 'run.bat' file--->Save
+Go to Dash board-->you can see new item(project) is created
+
+---->>cd C:\Users\Mir\eclipse-workspace\nopCommerce_V001
+       run.bat--->>>
+
+Apply and Save
+----------------------------------------------------------------------------------------------------
+
+
+Second Approach
+Real time Approach
+Run Automation using Jenkins Maven Project
+
+Pre-requisite:
+JAVA_HOME Configuration in Jenkins
+. Dasboard-->Manage Jenkins-->Global Tool Configuration-->JDK Installation
+.Steps:
+.New item-->provide name of the project-->Maven project-->ok
+.Go to build section-->Specify path of pom.xml and in 'Goals and options' field
+write the command 'clean install'
+
+"C:\Users\Mir\eclipse-workspace\nopCommerce_V001\pom.xml"
+
+-->>At the above approach there is some limitation---------------
+
+
+
+                       DevOps
+                         Jenkins(Here)
+
+
+
+           QA                          Developers(Dev team)
+
+
+
+So Jenkins is install in DevOps envirenment. Jenkins is running in DevOps System
+They have given just URL to the QA. But Jenkins is not in your local System
+In this note what I have done Jenkins is installed in my computer.
+We are able to configure paths even pom.xml path, All my project are available im my 
+local compuer. Jenkins also in the same System. Project and Jenkins in same system
+So I can easilly configure all the paths within the Jenkins and I should able to 
+execute it successfully there is no issue at all. But in the real time you dont
+do this approach because you dont keep any files in your local why because Jenkins
+will be installing DevOps System, they will just share the URL with you but actual
+application is there in DevOps server,but your project is still in your local system
+so how you configure your local path in remote jenkins, there is no way you can do it,
+so this is in an issue.
+
+so there is two suggetions
+1.We can just move the complete project in the DevOps server there we can configure
+with the Jenkins. This approach  will not follow in the real time because there are 
+so many people are working on so many things so how we can integrate all these project
+and how we can send them to DevOps. If it is a small company one or two people working
+it is okey then. But in the real time it doesnt happen like this.So this is the conflict we have
+How we can over come this? So we have to use common repository called git/github
+So we will put all our codes in the git/github repository. So this repository code
+can be accessed through URL. So Jenkins will take our codes from the github repository
+and automatically execute it.
+=======================================================================================
+Maintaince part
+
+.pavanoltraining
+https://github.com/pavanoltraining/nopCommerceV001.git
+
+
+Note: My workspace location"C:\Users\Mir\eclipse-workspace"
+Inside workspace location I created a project named as 'DataDriven_Core_Framework'
+So my project location is-->"C:\Users\Mir\eclipse-workspace\DataDriven_Core_Framework"
+I created my project using Maven through Eclipse.
+
+Open your current project directory. Right click here and Git Bash here,inside Git Bash it will show
+current working project directory. 
+
+$git init
+$git status
+$git add .
+$git commit -m 'This is my first commit and adding my project to the git'
+$git remote -v
+$git remote add origin git@github.com:miraalmamun/DataDriven_Core_Framework.git//stablist connection
+$git push -u origin master
+
+
+Lets go back github account and add README.md file
+Write inside the file 'This is a TestNG Data Driven Framework I am working on it. Details coming soon!!!' 
+On commit section write 'This commit from github. Just add README.md file'
+
+$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+
+
+$ git fetch
+Enter passphrase for key '/c/Users/Mir/.ssh/id_rsa':
+remote: Enumerating objects: 4, done.
+remote: Counting objects: 100% (4/4), done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+From github.com:miraalmamun/DataDriven_Core_Framework
+   d57aba2..5d36f27  master     -> origin/master
+
+$ git status
+On branch master
+Your branch is behind 'origin/master' by 1 commit, and can be fast-forwarded.
+  (use "git pull" to update your local branch)
+
+nothing to commit, working tree clean
+
+$ git pull
+Enter passphrase for key '/c/Users/Mir/.ssh/id_rsa':
+Updating d57aba2..5d36f27
+Fast-forward
+ README.md | 3 +++
+ 1 file changed, 3 insertions(+)
+ create mode 100644 README.md
+
+Now if you look in your local java working directory you can see a new file added in the 
+current working directory named as README.md and if you open the file you can see in it
+'This is a TestNG Data Driven Framework I am working on it. Details coming soon!!!'
+
+$ rm -rf .git(Remove .git)
+
+
+==================================================================================================================
+
+
+
+=================================================================================================================
+
+ 
+
+    How to Clone Github repository using SSH Key
+        Create SSH Key using Eclipse
+
+Window-->Preferences-->type filter text-->SSH-->click on 'SSH2'-->
+Key Management-->Generate RSA Key..-->
+Save Private Key..
+Pop up 'Are you sure you want to save this private key without
+passphrase protection'
+Click 'Ok'
+
+
+
+Now copy the key and save it on notepad
+Now go back to github and set the key
+'ssh-rsa 
+AAAAB3NzaC1yc2EAAAADAQABAAAAgQCk/zC3/tzQgyg2wno8tLDZb
++nhIZelMEuTRKFvFofUL0mjdMQrZmbMqz2qCNGwXb1deF2P6ZY5CWbiWcpKP0hR79EQsr688B/iBGWdKEsaRJ
++GhePaWgwvFSeCx8CoeX+hoSjEZ5WKhhazaEE86QNazYD1n7t5Y3cyiE5NT3UO+w== RSA-1024'                 
+
+===================================================================================================
+
+Very Important Note:
+
+How to bring 'Git Repositories' Explorer on Eclipse
+Right Click on Package Explorer Pan -->Show In-->Git Repositories
+
+1. How to create github repository
+2. How to clone repository in eclipse
+3. How to add eclipse project to github repository
+4. How to commit, push and pull the changes
+
+
+Step 1 : Create GitHub account and SignIn
+
+Step 2 : Start a Project = Create a repository
+
+Step 3 : Start Eclipse
+
+Step 4 : Goto Perspective - Git Repositories and click on Add Git Repo
+
+Step 5 : Create a project in Eclipse
+
+Step 6 : Do a right click on Project - Team - Share - Add to git repo
+
+Step 7 : Commit and Push the project to the repo
+
+Step 8 : Commit and Push every change to the repo
+
+
+
+
+
+
+
+
+
+
+
+
+
