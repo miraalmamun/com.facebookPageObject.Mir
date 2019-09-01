@@ -1,0 +1,279 @@
+IMPORTANT----->ChroPath Extends
+https://chrome.google.com/webstore/detail/chropath/ljngjbnaijcbncmcnjfhigebomdlkcjo?hl=en
+
+
+To learn more about this class, look below URL. It is a java document.
+1)https://docs.oracle.com/javase/10/docs/api/java/text/SimpleDateFormat.html
+2)http://tutorials.jenkov.com/java-internationalization/simpledateformat.html
+3)https://www.youtube.com/watch?v=lYiSm9cWkAU&t=1426s--->Important lesson for 
+Date and Time API-->JODA Time API
+
+SimpleDateFormat is a concrete class for formatting and parsing dates.
+It allows for formatting (date ? text), parsing (text ? date), and normalization.
+
+--> There are two very important methods in the SimpleDateFormat class
+1.format?()-->method
+2.parse()-->method
+
+
+Creating a SimpleDateFormat
+You create a SimpleDateFormat instance like this:
+
+String pattern = "yyyy-MM-dd";
+SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+-----------------------------------------------------------------------------------------------------------------
+Formatting Dates
+Once you have created a SimpleDateFormat instance you can format dates using its format() method. Here is an example:
+
+String pattern = "yyyy-MM-dd";
+SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
+String date = simpleDateFormat.format(new Date());
+System.out.println(date);
+The Date instance passed to the format() method is a java.util.Date instance.
+
+The output printed from the above SimpleDateFormat example would be:
+
+2018-09-09
+--------------------------------------------------------------------------------------------------------------------
+Format Date Into StringBuffer
+The Java SimpleDateFormat class is also capable of formatting a Date object into a 
+StringBuffer, instead of returning an individual String with the date formatted. 
+The SimpleDateFormat class does this via a version of the format() method that takes the Date, 
+StringBuffer and a FieldPosition instance as parameters.
+
+Here is an example of formatting a date into a StringBuffer using Java SimpleDateFormat :
+
+StringBuffer stringBuffer = new StringBuffer();
+Date now = new Date();
+
+SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ssZ");
+simpleDateFormat.format(now, stringBuffer, new FieldPosition(0));
+It is not exactly clear how the FieldPosition instance is used. It seems the format() method
+appends the formatted String to the end of the StringBuffer no matter what the int value passed 
+to the FieldPosition constructor is.
+---------------------------------------------------------------------------------------------------------------
+Parsing Dates
+You can parse a String into a java.util.Date instance using the parse() method of the SimpleDateFormat instance. 
+Here is an example:
+
+String pattern = "yyyy-MM-dd";
+SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
+Date date = simpleDateFormat.parse("2018-09-09");
+Once this code is executed, the date variable points to a Date instance representing september 9th, 2018.
+---------------------------------------------------------------------------------------------------------------------
+
+Example1:
+
+  package com.qtpselenium.zoho.project.practice;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
+import org.joda.time.DateTime;
+import org.joda.time.Months;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriverService;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.annotations.Test;
+
+public class DateFormt {
+
+	WebDriver driver;
+
+	@Test
+	public void dateFormat() throws Throwable {
+
+		System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "//Driver//chromedriver.exe");
+
+		ChromeOptions ops = new ChromeOptions();
+		ops.addArguments("--disable-notifications");
+		ops.addArguments("disable-infobars");
+		ops.addArguments("--start-maximized");
+		System.setProperty(ChromeDriverService.CHROME_DRIVER_LOG_PROPERTY,
+				System.getProperty("user.dir") + "\\DriverLog\\chrome.log");
+		System.setProperty(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
+		driver = new ChromeDriver(ops);
+
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		driver.manage().window().maximize();
+		driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
+		driver.navigate().to("https://jqueryui.com/datepicker/");
+		// List<WebElement> elements = driver.findElements(By.tagName("iframe"));
+		// System.out.println(elements.size());
+		driver.switchTo().frame(0);
+		driver.findElement(By.xpath("//*[@id= 'datepicker']")).click();
+
+		------------------------------------1---------------------------------------------
+                //This date need to select from date field. This date usually come from Excel file
+		String setDateStr = "2/6/2019";// It is better not to use '02'
+                -------------------------------------1---------------------------------------------
+
+                ------------------------------------------2-----------------------------------------
+                //I am getting this date from application
+		String currDateStr = driver.findElement(By.className("ui-datepicker-title")).getText().trim();
+		System.out.println(currDateStr);
+                -----------------------------------------------2--------------------------------------------
+
+                ---------------------------------------------------------3--------------------------------
+                //Coverting String value into Date object with the formet 'dd/MM/yyyy'
+		Date setDate = new SimpleDateFormat("dd/MM/yyyy").parse(setDateStr);
+                ----------------------------------------------------------------------3------------------
+                --------------4------------------------------------------------------------------------
+                //Coverting String value into Date object with the formet 'MMMM yyyy'
+		Date currDate = new SimpleDateFormat("MMMM yyyy").parse(currDateStr);
+               
+               ------------------------------------4--------------------------------------------------
+        
+                --------------------------------------------------5-------------------------------------
+                //Converting the date of the month into String format which I need to click on application
+                //Because on application days are String format
+
+		String dayToBeSelected = new SimpleDateFormat("d").format(setDate);
+               ---------------------------------------------------------------------5------------------------
+
+              --------------------------6-----------------------------------------------------------------
+               //
+
+
+
+                   <dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>2.10.3</version>
+		  </dependency>
+
+
+
+		int monthDiff = Months
+				.monthsBetween(new DateTime(currDate).withDayOfMonth(1), new DateTime(setDate).withDayOfMonth(1))
+				.getMonths();
+		System.out.println(monthDiff);
+             ----------------------------------------6-------------------------------------------------------
+		boolean isFuture = true;
+
+		if (monthDiff < 0) {
+			isFuture = false;
+			monthDiff = -1 * monthDiff;
+			// I am making 'monthDiff' as positive
+			// because I need to use it for 'far loop'
+
+		}
+
+		for (int i = 0; i < monthDiff; i++) {
+			if (isFuture) {
+				// driver.findElement(By.xpath("//*[@id='ui-datepicker-div']/div/a[1]/span")).click();
+				// span[text()='Next']
+				driver.findElement(By.xpath("//span[text()='Next']")).click();
+			} else {
+				driver.findElement(By.xpath("//span[text()='Prev']")).click();
+				// span[text()='Prev']
+				// driver.findElement(By.xpath("//*[@id='ui-datepicker-div']/div/a[2]/span")).click();
+			}
+
+		}
+
+		driver.findElement(By.xpath("//a[text()='" + dayToBeSelected + "']")).click();
+
+		Thread.sleep(9000);
+		driver.quit();
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Difference Between String , StringBuilder And StringBuffer Classes
+String
+String is immutable ( once created can not be changed )object . The object created as a
+String is stored in the Constant String Pool.
+Every immutable object in Java is thread safe ,that implies String is also thread safe . String
+can not be used by two threads simultaneously.
+String once assigned can not be changed.
+StringBuffer
+StringBuffer is mutable means one can change the value of the object . The object created
+through StringBuffer is stored in the heap. StringBuffer has the same methods as the
+StringBuilder , but each method in StringBuffer is synchronized that is StringBuffer is thread
+safe .
+Due to this it does not allow two threads to simultaneously access the same method . Each
+method can be accessed by one thread at a time .
+But being thread safe has disadvantages too as the performance of the StringBuffer hits due
+to thread safe property . Thus StringBuilder is faster than the StringBuffer when calling the
+same methods of each class.
+String Buffer can be converted to the string by using
+toString() method.
+StringBuffer demo1 = new StringBuffer("Hello") ;
+// The above object stored in heap and its value can be changed .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+String is immutable, if you try to alter their values, another object gets
+created, whereas StringBuffer and StringBuilder are mutable so they can 
+change their values. Thread-Safety Difference: The difference between 
+StringBuffer and StringBuilder is that StringBuffer is thread-safe.
