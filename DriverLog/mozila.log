@@ -1,27 +1,9 @@
-1567119245880	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mir\\AppData\\Local\\Temp\\rust_mozprofile.swWFQFDnY4KQ"
-1567119250083	Marionette	INFO	Listening on port 59498
-1567119250439	Marionette	WARN	TLS certificate errors will be ignored for this session
-1567119250479	Marionette	DEBUG	[6442450945] Frame script loaded
-1567119250481	Marionette	DEBUG	[6442450945] Frame script registered
-1567119250640	Marionette	DEBUG	[6442450945] Received DOM event beforeunload for about:blank
-1567119252117	Marionette	DEBUG	[6442450945] Received DOM event pagehide for about:blank
-1567119252644	Marionette	DEBUG	[6442450945] Received DOM event DOMContentLoaded for https://www.facebook.com/
-1567119253691	Marionette	DEBUG	[6442450945] Received DOM event pageshow for https://www.facebook.com/
-1567119266595	Marionette	DEBUG	[6442450945] Received observer notification outer-window-destroyed for 6442451017
-1567119266726	Marionette	DEBUG	[6442450945] Canceled page load listener because no navigation has been detected
-1567119267035	Marionette	DEBUG	[6442450945] Received observer notification outer-window-destroyed for 6442451019
-1567119267057	Marionette	DEBUG	[6442450945] Canceled page load listener because no navigation has been detected
-1567119267976	Marionette	DEBUG	[6442450945] Canceled page load listener because no navigation has been detected
-1567119268298	Marionette	DEBUG	[6442450945] Canceled page load listener because no navigation has been detected
-1567119268624	Marionette	DEBUG	[6442450945] Canceled page load listener because no navigation has been detected
-1567119269050	Marionette	DEBUG	[6442450945] Canceled page load listener because no navigation has been detected
-1567119275438	Marionette	INFO	Stopped listening on port 59498
-
-###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
-
-[Parent 10820, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
-[Child 11492, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
-[Child 11492, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
-
-###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
-
+1567811044206	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mir\\AppData\\Local\\Temp\\rust_mozprofile.vOIInqTOYYQE"
+1567811047638	Marionette	INFO	Listening on port 56386
+1567811048027	Marionette	WARN	TLS certificate errors will be ignored for this session
+1567811048061	Marionette	DEBUG	[6442450945] Frame script loaded
+1567811048067	Marionette	DEBUG	[6442450945] Frame script registered
+1567811048179	Marionette	DEBUG	[6442450945] Received DOM event beforeunload for about:blank
+1567811049165	Marionette	DEBUG	[6442450945] Received DOM event pagehide for about:blank
+1567811049733	Marionette	DEBUG	[6442450945] Received DOM event DOMContentLoaded for https://www.facebook.com/
+1567811050735	Marionette	DEBUG	[6442450945] Received DOM event pageshow for https://www.facebook.com/
