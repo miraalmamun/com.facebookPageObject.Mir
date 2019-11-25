@@ -30,38 +30,38 @@ public class BrokenLinks {
 		driver.manage().window().maximize();
 		driver.get("http://facebook.com");
 		driver.findElement(By.xpath("//input[@id='email']")).sendKeys("miraalmamun@gmail.com");
-		driver.findElement(By.xpath("//input[@id='pass']")).sendKeys("SarfinaNy@2018",Keys.ENTER);
+		driver.findElement(By.xpath("//input[@id='pass']")).sendKeys("SarfinaNy@2018", Keys.ENTER);
 		try {
 			Thread.sleep(8000);
 		} catch (InterruptedException e1) {
-		
+
 			e1.printStackTrace();
 		}
 		List<WebElement> links = driver.findElements(By.tagName("a"));
 		try {
 			Thread.sleep(4000);
 		} catch (InterruptedException e1) {
-			
+
 			e1.printStackTrace();
 		}
 		System.out.println("Total links--" + links.size());
 		links.addAll(driver.findElements(By.tagName("img")));
 		System.out.println("Total links with images--" + links.size());
-		
+
 		List<WebElement> activeLink = new ArrayList<WebElement>();
-		
+
 		HttpURLConnection connection = null;
 		for (int i = 0; i < links.size(); i++) {
 			if (links.get(i).getAttribute("href") != null) {
 				try {
 					Thread.sleep(2000);
 				} catch (InterruptedException e) {
-					
+
 					e.printStackTrace();
 				}
 				activeLink.add(links.get(i));
-				System.out.println(i+" "+links.get(i).getAttribute("href")+"-->LINK");
-            
+				System.out.println(i + " " + links.get(i).getAttribute("href") + "-->LINK");
+
 				try {
 					connection = (HttpURLConnection) new URL(activeLink.get(i).getAttribute("href")).openConnection();
 					connection.connect();
@@ -74,20 +74,19 @@ public class BrokenLinks {
 					e.printStackTrace();
 					System.out.println(e.getMessage());
 				}
-                
+
 			}
 			if (links.get(i).getAttribute("src") != null) {
 				try {
 					Thread.sleep(2000);
 				} catch (InterruptedException e) {
-					
+
 					e.printStackTrace();
-					
+
 				}
 				activeLink.add(links.get(i));
-				System.out.println(i+" "+links.get(i).getAttribute("src")+"-->IMG");
-				
-				
+				System.out.println(i + " " + links.get(i).getAttribute("src") + "-->IMG");
+
 				try {
 					connection = (HttpURLConnection) new URL(activeLink.get(i).getAttribute("src")).openConnection();
 					connection.connect();
@@ -100,7 +99,7 @@ public class BrokenLinks {
 					e.printStackTrace();
 					System.out.println(e.getMessage());
 				}
-              
+
 			}
 
 		}

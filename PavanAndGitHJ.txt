@@ -34,18 +34,18 @@ Very Important Note: testng.xml,we can execute only within Eclipse. So with out
 Eclipse we cannot execute testng.xml file. There is other way we can execute our 
 testcases through pom.xml, to execute pom.xml file, it is not mandatory to use Eclipse
 with out Eclipse we can execute our testcases through pom.xml file.
--->So far we used pom.xml file only for dependecy. pom.xml file downloan all jars
+-->So far we used pom.xml file only for dependecy. pom.xml file download all jars
 and attached to our project.
--->So we are going to see how to use pom.xml file to execute testcases. Internally
+-->So we are going to see how to use pom.xml file to execute test cases. Internally
 pom.xml file execute testng.xml file.
 
 --> So question here since we have testng.xml file why we need pom.xml file for
 execution? Answer --> Without Eclipse we cannot execute testng.xml file. If we closed
-Eclipse, we cannot execute testcases through testng.xml file. Thats why we need use pom.xml
-for execution.To use pom.xml we donot need required Eclipse. Without Eclipse we can run our
-automation testcases. This is the another benefite to use pom.xml file.
+Eclipse, we cannot execute test cases through testng.xml file. Thats why we need use pom.xml
+for execution.To use pom.xml we do not need required Eclipse. Without Eclipse we can run our
+automation test cases. This is the another benefit to use pom.xml file.
 
---> Here is very important note to remember, First execute testcases through pom.xml
+--> Here is very important note to remember, First execute test cases through pom.xml
 by using Eclipse, then it will be running without any issue. It is validation.
 So first run Maven pom.xml file within your Eclipse. Then it will be good to use 
 other places.
@@ -91,11 +91,11 @@ Open you Eclipse--> Below properties,before dependencies add the following
 
 
 
-Note: 'maven-compiler-plugin'--> responsibles for compile the codes
-      'maven-surefire-plugin'--> respensibles for executing 'testng.xml' file
+Note: 'maven-compiler-plugin'--> responsible for compile the codes
+      'maven-surefire-plugin'--> responsible for executing 'testng.xml' file
 
 
-As soon as you add this two plugins, Right click on project-->Select Maven-->
+As soon as you add this two plug ins, Right click on project-->Select Maven-->
 Update project
 
 RUN TEST CASES USING MAVEN pom.xml
@@ -114,13 +114,13 @@ running on a JRE rather than a JDK?
 --------------After success above approach then go next approach----------
 2) Run test cases using Command prompt(Without using Eclipse)------------
 
-We have to install complete Maven software. Normally Maven is available in two flavour
+We have to install complete Maven software. Normally Maven is available in two flavor
  1.As Eclipse plugin(We are able to run test cases within Eclipse only/create Maven project/Updated xml file)
 If you want run test cases through command prompt, we need to install Maven on our
 Operating System. Maven is availabe as a installer on specific OS.
  2.Installed Maven on OS(Operating System-->Windows,Linux,Mac,Unix)
 ----------------------------------------------------------------------------------
-       Download and Cofiguratin 
+       Download and Cofiguration 
 ---------------------------------------------------------------------------------
 https://maven.apache.org/download.cgi
 Maven download Link:
