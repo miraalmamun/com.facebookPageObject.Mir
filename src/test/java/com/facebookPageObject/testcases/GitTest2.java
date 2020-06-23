@@ -6,6 +6,14 @@ public class GitTest2 {
 		
 		
 		System.out.println("I am from master");
+		///
+		//
+		//
+		//
+		System.out.println("I am from master");
+		
+		
+		
 	}
 
 }
