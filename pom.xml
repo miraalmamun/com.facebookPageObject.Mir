@@ -21,7 +21,6 @@
 		<surefire.version>2.18.1</surefire.version>
 		<gson.version>2.8.1</gson.version>
 		<httpclient.version>4.3.3</httpclient.version>
-		<guava.version>23.0</guava.version>
 		<cglib.version>3.1</cglib.version>
 		<commons-io.version>2.6</commons-io.version>
 		<junit.version>3.8.1</junit.version>
@@ -194,16 +193,7 @@
 			<version>${httpclient.version}</version> </dependency> -->
 
 		<!-- ===============================End of HttpClient======================================= -->
-		<!--Guava is an open source, Java-based library and contains many core 
-			libraries of Google, which are being used in many of their projects. It facilitates 
-			best coding practices and helps reduce coding errors. -->
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-			<version>${guava.version}</version>
-		</dependency>
-
-		<!-- ===============================================End of guava=============================== -->
+	
 		<!--cglib is a powerful, high performance and quality Code Generation Library, 
 			It is used to extend JAVA classes and implements interfaces at runtime. See 
 			samples and API documentation to learn more about features. This library 
